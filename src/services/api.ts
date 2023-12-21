@@ -8,11 +8,12 @@ const req = axios.create({
   baseURL,
 })
 
-export const getBooks = async (title: string): Promise<BookType[]> => {
+export const getBooks = async (filter: string): Promise<BookType[]> => {
   const response = await req.get('/volumes', {
     params: {
-      q: `intitle:"${title}"`,
+      q: filter,
       key: API_KEY,
+      maxResults: 40,
     },
   })
   return response.data.items

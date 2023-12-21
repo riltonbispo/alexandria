@@ -1,7 +1,7 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -14,15 +14,22 @@ import { Star } from 'lucide-react'
 
 type props = {
   favorite?: boolean
+  description: string
 }
 
-const Modal = ({ favorite }: props) => {
+const Modal = ({ favorite, description }: props) => {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Dialog>
-      <DialogTrigger className="flex-1">
-        <Button className="w-full">Open</Button>
-      </DialogTrigger>
-      <DialogContent className="">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <Button
+        onClick={() => setOpen((prev) => !prev)}
+        className="w-full"
+        variant={'secondary'}
+      >
+        Ver Mais{' '}
+      </Button>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-4">
             <h4 className="text-xl">Are you sure absolutely sure?</h4>
@@ -30,12 +37,7 @@ const Modal = ({ favorite }: props) => {
               {favorite ? <Star color="#fbbf24" fill="#fbbf24" /> : <Star />}
             </Button>
           </DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers. This action cannot be
-            undone. This will permanently delete your account and remove your
-            data from our servers.
-          </DialogDescription>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <div>
           <AspectRatio ratio={1 / 1} className="bg-muted">
