@@ -64,7 +64,7 @@ const BookCard = ({ favorite, book }: props) => {
             <Heart className="h-4 w-4" />
           </Button>
         )}
-        <Modal favorite={favorite} description={book.volumeInfo.description} />
+        <Modal favorite={favorite} book={book} />
       </CardFooter>
     </Card>
   )

@@ -26,6 +26,11 @@ export default function Home() {
           placeholder="pesquise seu livro favorito"
           className="max-w-[80%] md:max-w-[40%]"
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleSearch()
+            }
+          }}
         />
         <Button variant="secondary" onClick={handleSearch}>
           Pesquisar

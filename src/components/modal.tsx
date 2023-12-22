@@ -8,16 +8,15 @@ import {
   DialogDescription,
 } from './ui/dialog'
 import { Button } from './ui/button'
-import { AspectRatio } from './ui/aspect-ratio'
-import Image from 'next/image'
 import { Star } from 'lucide-react'
+import { BookType } from '@/types/bookType'
 
 type props = {
   favorite?: boolean
-  description: string
+  book: BookType
 }
 
-const Modal = ({ favorite, description }: props) => {
+const Modal = ({ favorite, book }: props) => {
   const [open, setOpen] = useState(false)
 
   return (
@@ -27,28 +26,18 @@ const Modal = ({ favorite, description }: props) => {
         className="w-full"
         variant={'secondary'}
       >
-        Ver Mais{' '}
+        Ver Mais
       </Button>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-4">
-            <h4 className="text-xl">Are you sure absolutely sure?</h4>
+            <h4 className="text-xl">{book.volumeInfo.title}</h4>
             <Button variant="ghost" size="icon">
               {favorite ? <Star color="#fbbf24" fill="#fbbf24" /> : <Star />}
             </Button>
           </DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogDescription>{book.volumeInfo.description}</DialogDescription>
         </DialogHeader>
-        <div>
-          <AspectRatio ratio={1 / 1} className="bg-muted">
-            <Image
-              src="https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80"
-              alt="Photo by Drew Beamer"
-              fill
-              className="rounded-md object-cover"
-            />
-          </AspectRatio>
-        </div>
       </DialogContent>
     </Dialog>
   )
